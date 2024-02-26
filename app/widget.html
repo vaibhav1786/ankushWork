@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./widget.css" />
+  <script src="https://js.zohostatic.com/creator/widgets/version/1.0/widgetsdk-min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+  <style>
+    a.canvasjs-chart-credit {
+      display: none;
+    }
+
+    .chart-2 {
+      height: 370px;
+      width: 50%;
+    }
+
+    .chart-2-icons {
+      background: #fff;
+      padding: 10px;
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+    }
+
+    .chart-2-icons-1,
+    .chart-2-icons-2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chart-2-icons .chart-2-icons-1 li {
+      width: 20px;
+      height: 20px;
+      list-style: none;
+
+      background: rgb(29, 119, 255);
+    }
+    .chart-2-icons .chart-2-icons-2 li {
+      width: 20px;
+      height: 20px;
+      list-style: none;
+
+      background: rgb(236, 66, 63);
+    }
+    .second-chart{
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+  </style>
+
+
+
+
+</head>
+
+<body>
+  <div>
+    <div class="container">
+      <div class="table_parent">
+        <div class="table_header">
+          <h2>Defect Pareto Chart</h2>
+          <div class="right_headerSection">
+
+            <div class="refresh">
+              <button id="refreshButton" onclick="generate()" disabled >
+                <img src="./img/refresh.png" alt="refresh" />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="table_dataSection">
+          <div>
+            <div class="flex_table">
+              <div class="completeData">
+                <label for="division">Division:</label><select name="division" id="division" onchange="getTheDivsionID()">
+                  <option value="All">All</option>
+                </select>
+              </div>
+              <div class="completeData">
+                <label for="plant">Plant:</label><select name="plant" id="plant" disabled>
+                  <option value="All">All</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="flex_table">
+              <div class="completeData">
+                <label for="group">Product Group:</label><select name="group" id="productGroup" onchange="populateProductSegment()">
+                  <option value="All">All</option>
+                </select>
+              </div>
+              <div class="completeData">
+                <label for="segment">Product Segment:</label><select name="segment" id="product-segment" >
+                  <option value="All">All</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="flex_table">
+              <div class="completeData-select">
+                <label for="from">From Date:<span style="color: red">*</span></label>
+                <div>
+                 <input type="date" id="fromDateFFBR" onclick="setDate()" >
+                </div>
+              </div>
+              <div class="completeData-select">
+                <label for="todate">To Date:<span style="color: red">*</span></label>      <div>
+                  <input type="date" id="toDateFFBR" onclick="setDate()">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="second-chart" id="chart" style="display: none;">
+            <div id="chartContainer" class="chart-2"></div>
+            <div class="chart-2-icons">
+              <span class="chart-2-icons-1">
+                <li></li>Defects
+              </span>
+              <span class="chart-2-icons-2">
+                <li></li>Cumulative
+              </span>
+            </div>
+          </div>
+
+
+
+          <div>
+            <h3 class="record_found" id="record_found"></h3>
+
+            <div class="below">
+              <div>
+                <canvas id="barChart" width="500" height="300"></canvas>
+              </div>
+              <div class="table_records newtablezebra">
+                <table border="1" cellspacing="0" id="table" style="display: none;">
+                  <thead>
+                    <tr>
+                      <th>Defects</th>
+                      <th>Total</th>
+
+
+                    </tr>
+                  </thead>
+                  <tbody id="tableBody">
+                    <!-- <tr>
+                      <td>ABNORMAL NOISE</td>
+                      <td>1</td>
+                    </tr>
+                    <tr>
+                      <td>TOTAL</td>
+                      <td>1</td>
+                    </tr> -->
+                    
+
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <div class="button_parent">
+        <button class="success" onclick="generate()">Generate</button>
+
+        <button class="success" onclick="window.location.reload()" >Cancel</button>
+      </div>
+    </div>
+   
+    </footer>
+<script src="index.js"></script>
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+</body>
+
+</html>
